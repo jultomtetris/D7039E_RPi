@@ -5,7 +5,7 @@
 
 int initSpi();
 void endSpi();
-void transfer(uint8_t *raw_data);
+void transfer(uint8_t);
 
 
 #endif /*SPISENDER_H_*/

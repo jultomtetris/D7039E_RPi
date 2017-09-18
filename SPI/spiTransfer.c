@@ -1,4 +1,5 @@
 #include "CmdSys.h"
+#include "SpiSender.h"
 #include <stdio.h>
 
 //#include "CmdSys.h"
@@ -23,11 +24,12 @@ int main(){
 	transfer(raw_data);
 	endSpi();
 	return 0;*/
+	initSpi();
 	int input_speed;
 	int command;
 	int xcoord = 0;
 	int ycoord = 0;
-	printf("Commands:\n 1: STOP\n 2:FORWARD\n 3:REVERSE\n 4:LEFT\n 5:REFT\n 6:MOVE(NOT IMPLEMENTED)\n")
+	printf("Commands:\n 1: STOP\n 2:FORWARD\n 3:REVERSE\n 4:LEFT\n 5:REFT\n 6:MOVE(NOT IMPLEMENTED)\n");
 	printf("Choose command 1-6:\n");
 	scanf("%d\n", &command);
 	printf("Set Speed -100-100:\n");
@@ -49,8 +51,8 @@ int main(){
 			SendMove(uspeed, xcoord, ycoord);
 
 		default :
-			return 0:
+			return 0;
 			break;
 	}
-
+	endSpi();
 }
