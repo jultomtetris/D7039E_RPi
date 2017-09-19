@@ -1,0 +1,12 @@
+CC=gcc
+CFLAGS=-I
+ODIR=../Debug
+LIBS=-lbcm2835
+
+_OBJ = main.o com/SpiSender.o framework/CmdSys.o utils/Cobs.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+%.o %.c $(DEPS)
+      $(CC) -c -0 $@ $< $(CFLAGS)
+rpimake: $(OBJ)
+      gcc -o $@ $^ $(CFLAGS)

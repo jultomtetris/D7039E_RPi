@@ -1,7 +1,7 @@
 #include "SpiSender.h"
 #include <bcm2835.h>
 #include <stdio.h>
-#include "Cobs.h"
+#include "../utils/Cobs.h"
 
 int initSpi(){
 	if (!bcm2835_init()){

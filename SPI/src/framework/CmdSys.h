@@ -1,5 +1,6 @@
 #ifndef CMDSYS_H_
 #define CMDSYS_H_
+#include <stdint.h>
 
 #define MCU_STOP 0x01
 #define MCU_FORWARD 0x02
@@ -10,10 +11,10 @@
 #define MCU_NULL 0x00
 
 void SendStop();
-void SendForward(uint8_t);
-void SendReverse(uint8_t);
-void SendLeft(uint8_t);
-void SendRight(uint8_t);
-void SendMove(uint8_t, int, int);
+void SendForward(uint8_t speed);
+void SendReverse(uint8_t speed);
+void SendLeft(uint8_t speed);
+void SendRight(uint8_t speed);
+void SendMove(uint8_t speed, int xCoord, int yCoord);
 
 #endif /*CMDSYS_H_*/
