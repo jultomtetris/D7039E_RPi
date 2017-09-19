@@ -17,8 +17,6 @@ int main(){
 	printf("Commands:\n 1:STOP\n 2:FORWARD\n 3:REVERSE\n 4:LEFT\n 5:REFT\n 6:MOVE(NOT IMPLEMENTED)\n");
 	printf("Choose command 1-6:\n");
 	scanf("%d", &command);
-	//printf("Set Speed -100-100:\n");
-	//scanf("%d\n", &input_speed);
 	uint8_t uspeed;
 	switch(command) {
 		case 1 :
