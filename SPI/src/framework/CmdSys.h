@@ -16,5 +16,6 @@ void SendReverse(uint8_t speed);
 void SendLeft(uint8_t speed);
 void SendRight(uint8_t speed);
 void SendMove(uint8_t speed, int xCoord, int yCoord);
+void TempTest();
 
 #endif /*CMDSYS_H_*/
