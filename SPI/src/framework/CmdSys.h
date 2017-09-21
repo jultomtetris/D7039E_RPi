@@ -9,6 +9,7 @@
 #define MCU_RIGHT 0x05
 #define MCU_MOVE 0x06
 #define MCU_NULL 0x00
+#define MCU_FEED 0x07
 
 void SendStop();
 void SendForward(uint8_t speed);
@@ -16,6 +17,7 @@ void SendReverse(uint8_t speed);
 void SendLeft(uint8_t speed);
 void SendRight(uint8_t speed);
 void SendMove(uint8_t speed, int xCoord, int yCoord);
+void FeedCurrentPosition(int xCoord, int yCoord);
 void TempTest();
 
 #endif /*CMDSYS_H_*/

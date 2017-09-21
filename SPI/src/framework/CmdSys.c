@@ -58,14 +58,33 @@ void  SendMove(uint8_t speed, int xCoord, int yCoord) {
   rawData[9] = yCoordArr[3];
   transfer(rawData);
 }
+
+void FeedCurrentPosition (int xCoord, int yCoord) {
+  uint8_t xCoordArr[4];
+  uint8_t yCoordArr[4];
+  TypeCast32To8(xCoord, xCoordArr);
+  TypeCast32To8(yCoord, yCoordArr);
+  rawData[0] = MCU_FEED;
+  rawData[1] = xCoordArr[0];
+  rawData[2] = xCoordArr[1];
+  rawData[3] = xCoordArr[2];
+  rawData[4] = xCoordArr[3];
+  rawData[5] = yCoordArr[0];
+  rawData[6] = yCoordArr[1];
+  rawData[7] = yCoordArr[2];
+  rawData[8] = yCoordArr[3];
+
+
+}
+
 void TempTest () {
   initSpi();
   int input_speed;
   int command;
   int xcoord = 0;
   int ycoord = 0;
-  printf("Commands:\n 1:STOP\n 2:FORWARD\n 3:REVERSE\n 4:LEFT\n 5:REFT\n 6:MOVE(NOT IMPLEMENTED)\n");
-  printf("Choose command 1-6:\n");
+  printf("Commands:\n 1:STOP\n 2:FORWARD\n 3:REVERSE\n 4:LEFT\n 5:REFT\n 6:MOVE\n 7:FEED\n");
+  printf("Choose command 1-7:\n");
   scanf("%d", &command);
   uint8_t uspeed;
   switch(command) {
@@ -106,6 +125,12 @@ void TempTest () {
       scanf("%d", &ycoord);
       SendMove(uspeed, xcoord, ycoord);
       break;
+    case 7 :
+      printf("Set xcoord:");
+      scanf("%d", &xcoord);
+      printf("Set ycoord:");
+      scanf("%d", &ycoord);
+      FeedCurrentPosition(xcoord, ycoord);
     default :
       //return 0;
       break;
