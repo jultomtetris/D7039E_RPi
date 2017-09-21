@@ -1,5 +1,6 @@
 #include "CmdSys.h"
 #include "../com/SpiSender.h"
+#include <stdio.h>
 
 uint8_t rawData[BUFFERSIZE];
 
@@ -106,7 +107,7 @@ void TempTest () {
       SendMove(uspeed, xcoord, ycoord);
       break;
     default :
-      return 0;
+      //return 0;
       break;
   }
   endSpi();
