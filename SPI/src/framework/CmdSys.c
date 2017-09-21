@@ -131,6 +131,7 @@ void TempTest () {
       printf("Set ycoord:");
       scanf("%d", &ycoord);
       FeedCurrentPosition(xcoord, ycoord);
+      break;
     default :
       //return 0;
       break;
