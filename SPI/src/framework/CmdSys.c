@@ -41,7 +41,7 @@ void SendRight(uint8_t speed) {
   transfer(rawData);
 }
 
-void  SendMove(uint8_t speed, , int xCurrentPos, int yCurrentPos, int xCoord, int yCoord) {
+void  SendMove(uint8_t speed, int xCurrentPos, int yCurrentPos, int xCoord, int yCoord) {
   uint8_t xCoordArr[4];
   uint8_t yCoordArr[4];
   uint8_t xCurrentPosArr[4];
