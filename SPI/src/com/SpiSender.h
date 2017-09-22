@@ -2,7 +2,7 @@
 #define SPISENDER_H_
 #include <stdint.h>
 
-#define BUFFERSIZE 10
+#define BUFFERSIZE 20
 
 int initSpi();
 void endSpi();

@@ -17,7 +17,7 @@ void SendForward(uint8_t speed);
 void SendReverse(uint8_t speed);
 void SendLeft(uint8_t speed);
 void SendRight(uint8_t speed);
-void SendMove(uint8_t speed, int xCoord, int yCoord);
+void SendMove(uint8_t speed, int xCurrentPos, int yCurrentPos, int xCoord, int yCoord);
 void FeedCurrentPosition(int xCoord, int yCoord);
 void TempTest();
 

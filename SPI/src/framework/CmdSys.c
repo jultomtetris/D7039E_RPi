@@ -41,21 +41,33 @@ void SendRight(uint8_t speed) {
   transfer(rawData);
 }
 
-void  SendMove(uint8_t speed, int xCoord, int yCoord) {
+void  SendMove(uint8_t speed, , int xCurrentPos, int yCurrentPos, int xCoord, int yCoord) {
   uint8_t xCoordArr[4];
   uint8_t yCoordArr[4];
+  uint8_t xCurrentPosArr[4];
+  uint8_t yCurrentPosArr[4];
+  TypeCast32To8(xCurrentPos, xCurrentPosArr);
+  TypeCast32To8(yCurrentPos, yCurrentPosArr);
   TypeCast32To8(xCoord, xCoordArr);
   TypeCast32To8(yCoord, yCoordArr);
   rawData[0] = MCU_MOVE;
   rawData[1] = speed;
-  rawData[2] = xCoordArr[0];
-  rawData[3] = xCoordArr[1];
-  rawData[4] = xCoordArr[2];
-  rawData[5] = xCoordArr[3];
-  rawData[6] = yCoordArr[0];
-  rawData[7] = yCoordArr[1];
-  rawData[8] = yCoordArr[2];
-  rawData[9] = yCoordArr[3];
+  rawData[2] = xCurrentPosArr[0];
+  rawData[3] = xCurrentPosArr[1];
+  rawData[4] = xCurrentPosArr[2];
+  rawData[5] = xCurrentPosArr[3];
+  rawData[6] = yCurrentPosArr[0];
+  rawData[7] = yCurrentPosArr[1];
+  rawData[8] = yCurrentPosArr[2];
+  rawData[9] = yCurrentPosArr[3];
+  rawData[10] = xCoordArr[0];
+  rawData[11] = xCoordArr[1];
+  rawData[12] = xCoordArr[2];
+  rawData[13] = xCoordArr[3];
+  rawData[14] = yCoordArr[0];
+  rawData[15] = yCoordArr[1];
+  rawData[16] = yCoordArr[2];
+  rawData[17] = yCoordArr[3];
   transfer(rawData);
 }
 
@@ -82,6 +94,8 @@ void TempTest () {
   int command;
   int xcoord = 0;
   int ycoord = 0;
+  int currentX = 0;
+  int currentY = 0;
   printf("Commands:\n 1:STOP\n 2:FORWARD\n 3:REVERSE\n 4:LEFT\n 5:REFT\n 6:MOVE\n 7:FEED\n");
   printf("Choose command 1-7:\n");
   scanf("%d", &command);
@@ -118,11 +132,15 @@ void TempTest () {
       printf("Set Speed -100-100:\n");
       scanf("%d", &input_speed);
       uspeed = (uint8_t)input_speed;
+      printf("Set current x:\n");
+      scanf("%d", &currentX);
+      printf("Set current y:\n");
+      scanf("%d", &currentY);
       printf("Set xcoord:");
       scanf("%d", &xcoord);
       printf("Set ycoord:");
       scanf("%d", &ycoord);
-      SendMove(uspeed, xcoord, ycoord);
+      SendMove(uspeed, currentX, currentY, xcoord, ycoord);
       break;
     case 7 :
       printf("Set xcoord:");
