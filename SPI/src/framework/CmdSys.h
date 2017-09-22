@@ -8,8 +8,9 @@
 #define MCU_LEFT 0x04
 #define MCU_RIGHT 0x05
 #define MCU_MOVE 0x06
-#define MCU_NULL 0x00
 #define MCU_FEED 0x07
+#define MCU_NULL 0x00
+
 
 void SendStop();
 void SendForward(uint8_t speed);
