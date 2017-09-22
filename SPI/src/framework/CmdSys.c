@@ -73,8 +73,7 @@ void FeedCurrentPosition (int xCoord, int yCoord) {
   rawData[6] = yCoordArr[1];
   rawData[7] = yCoordArr[2];
   rawData[8] = yCoordArr[3];
-
-
+  transfer(rawData);
 }
 
 void TempTest () {
