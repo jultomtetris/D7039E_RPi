@@ -1,0 +1,170 @@
+
+#include "../../include/intelli_mower/CmdSys.h"
+#include "../../include/intelli_mower/SpiSender.h"
+#include <stdio.h>
+
+
+uint8_t rawData[BUFFERSIZE];
+
+void TypeCast32To8(int conv, uint8_t *converted) {
+  converted[0] = (conv >> 24) & 0xFF;
+  converted[1] = (conv >> 16) & 0xFF;
+  converted[2] = (conv >> 8) & 0xFF;
+  converted[3] = conv & 0xFF;
+  //return converted;
+}
+//void FloatToByteArray(float *src, int size_src, uint8_t *dst) {
+//	int i = 0;
+//	while(i < size_src) {
+//		floatByte fb;
+//		fb.f = src[i];
+//		for(int j = 0; j < 4; j++) {
+//			dst[(4*i)+j] = fb.byte[j];
+//		}
+//		i++;
+//	}
+//}
+
+void SendStop(){
+  rawData[0] = MCU_STOP;
+  transfer(rawData);
+}
+
+void SendForward(uint8_t speed) {
+  rawData[0] = MCU_FORWARD;
+  rawData[1] = speed;
+  transfer(rawData);
+}
+
+void SendReverse(uint8_t speed) {
+  rawData[0] = MCU_REVERSE;
+  rawData[1] = speed;
+  transfer(rawData);
+}
+
+void SendLeft(uint8_t speed) {
+  rawData[0] = MCU_LEFT;
+  rawData[1] = speed;
+  transfer(rawData);
+}
+
+void SendRight(uint8_t speed) {
+  rawData[0] = MCU_RIGHT;
+  rawData[1] = speed;
+  transfer(rawData);
+}
+
+void  SendMove(uint8_t speed, int xCurrentPos, int yCurrentPos, int xCoord, int yCoord) {
+  uint8_t xCoordArr[4];
+  uint8_t yCoordArr[4];
+  uint8_t xCurrentPosArr[4];
+  uint8_t yCurrentPosArr[4];
+  TypeCast32To8(xCurrentPos, xCurrentPosArr);
+  TypeCast32To8(yCurrentPos, yCurrentPosArr);
+  TypeCast32To8(xCoord, xCoordArr);
+  TypeCast32To8(yCoord, yCoordArr);
+  rawData[0] = MCU_MOVE;
+  rawData[1] = speed;
+  rawData[2] = xCurrentPosArr[0];
+  rawData[3] = xCurrentPosArr[1];
+  rawData[4] = xCurrentPosArr[2];
+  rawData[5] = xCurrentPosArr[3];
+  rawData[6] = yCurrentPosArr[0];
+  rawData[7] = yCurrentPosArr[1];
+  rawData[8] = yCurrentPosArr[2];
+  rawData[9] = yCurrentPosArr[3];
+  rawData[10] = xCoordArr[0];
+  rawData[11] = xCoordArr[1];
+  rawData[12] = xCoordArr[2];
+  rawData[13] = xCoordArr[3];
+  rawData[14] = yCoordArr[0];
+  rawData[15] = yCoordArr[1];
+  rawData[16] = yCoordArr[2];
+  rawData[17] = yCoordArr[3];
+  transfer(rawData);
+}
+
+void FeedCurrentPosition (float xCoord, float yCoord) {
+  uint8_t xCoordArr[4];
+  uint8_t yCoordArr[4];
+  TypeCast32To8((int)xCoord, xCoordArr);
+  TypeCast32To8((int)yCoord, yCoordArr);
+  rawData[0] = MCU_FEED;
+  rawData[1] = xCoordArr[0];
+  rawData[2] = xCoordArr[1];
+  rawData[3] = xCoordArr[2];
+  rawData[4] = xCoordArr[3];
+  rawData[5] = yCoordArr[0];
+  rawData[6] = yCoordArr[1];
+  rawData[7] = yCoordArr[2];
+  rawData[8] = yCoordArr[3];
+  transfer(rawData);
+}
+
+void TempTest (const std_msgs::String::ConstPtr& msg) {
+
+  printf("Rx: %s", msg->data.c_str());
+  // int input_speed;
+  // int command;
+  // int xcoord = 0;
+  // int ycoord = 0;
+  // int currentX = 0;
+  // int currentY = 0;
+  // printf("Commands:\n 1:STOP\n 2:FORWARD\n 3:REVERSE\n 4:LEFT\n 5:REFT\n 6:MOVE\n 7:FEED\n");
+  // printf("Choose command 1-7:\n");
+  // scanf("%d", &command);
+  // uint8_t uspeed;
+  // switch(command) {
+  //   case 1 :
+  //     SendStop();
+  //     break;
+  //   case 2 :
+  //     printf("Set Speed -100-100:\n");
+  //     scanf("%d", &input_speed);
+  //     uspeed = (uint8_t)input_speed;
+  //     SendForward(uspeed);
+  //     break;
+  //   case 3 :
+  //     printf("Set Speed -100-100:\n");
+  //     scanf("%d", &input_speed);
+  //     uspeed = (uint8_t)input_speed;
+  //     SendReverse(uspeed);
+  //     break;
+  //   case 4 :
+  //     printf("Set Speed -100-100:\n");
+  //     scanf("%d", &input_speed);
+  //     uspeed = (uint8_t)input_speed;
+  //     SendLeft(uspeed);
+  //     break;
+  //   case 5 :
+  //     printf("Set Speed -100-100:\n");
+  //     scanf("%d", &input_speed);
+  //     uspeed = (uint8_t)input_speed;
+  //     SendRight(uspeed);
+  //     break;
+  //   case 6 :
+  //     printf("Set Speed -100-100:\n");
+  //     scanf("%d", &input_speed);
+  //     uspeed = (uint8_t)input_speed;
+  //     printf("Set current x:\n");
+  //     scanf("%d", &currentX);
+  //     printf("Set current y:\n");
+  //     scanf("%d", &currentY);
+  //     printf("Set xcoord:");
+  //     scanf("%d", &xcoord);
+  //     printf("Set ycoord:");
+  //     scanf("%d", &ycoord);
+  //     SendMove(uspeed, currentX, currentY, xcoord, ycoord);
+  //     break;
+  //   case 7 :
+  //     printf("Set xcoord:");
+  //     scanf("%d", &xcoord);
+  //     printf("Set ycoord:");
+  //     scanf("%d", &ycoord);
+  //     FeedCurrentPosition(xcoord, ycoord);
+  //     break;
+  //   default :
+  //     //return 0;
+  //     break;
+  // }
+}

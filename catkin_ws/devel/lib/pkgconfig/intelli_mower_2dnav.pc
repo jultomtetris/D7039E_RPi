@@ -1,0 +1,8 @@
+prefix=/home/pi/catkin_ws/devel
+
+Name: intelli_mower_2dnav
+Description: Description of intelli_mower_2dnav
+Version: 0.0.1
+Cflags: 
+Libs: -L/home/pi/catkin_ws/devel/lib 
+Requires: 

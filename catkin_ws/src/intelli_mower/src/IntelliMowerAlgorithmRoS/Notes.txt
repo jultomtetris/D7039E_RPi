@@ -1,0 +1,9 @@
+
+
+bug can for some occasions the path calculations can cut through walls and obstacles.
+
+Obstacles are taken out right now because we will first be testing without obstacles and if we have time add the obstale creation.
+
+we can rotate the path lines 
+
+if the mowoffset is set to mowOffset < 10 it will become unstable certain cases exist where the collision detection fails, might be due to rounding errors or bugs.

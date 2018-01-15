@@ -1,0 +1,5 @@
+<launch>
+  <node name="map_calc" pkg="intelli_mower" type="temp_mapalgo.py" />
+  <node name="listener" pkg="intelli_mower" type="listener" />
+  <node name="uart_comm" pkg="intelli_mower" type="uartcom.py" />
+</launch>
