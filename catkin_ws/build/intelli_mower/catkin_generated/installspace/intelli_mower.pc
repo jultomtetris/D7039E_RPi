@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/install
-
-Name: intelli_mower
-Description: Description of intelli_mower
-Version: 0.0.1
-Cflags: -I/home/pi/catkin_ws/install/include
-Libs: -L/home/pi/catkin_ws/install/lib 
-Requires: roscpp rospy std_msgs message_runtime

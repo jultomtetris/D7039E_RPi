@@ -1,2 +1,0 @@
-intelli_mower:intelli_mower_2dnav
--DCATKIN_DEVEL_PREFIX=/home/pi/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/pi/catkin_ws/install -G Unix Makefiles

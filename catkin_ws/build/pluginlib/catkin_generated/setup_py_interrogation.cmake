@@ -1,6 +1,0 @@
-set(pluginlib_SETUP_PY_VERSION "1.11.0")
-set(pluginlib_SETUP_PY_SCRIPTS "")
-set(pluginlib_SETUP_PY_PACKAGES "")
-set(pluginlib_SETUP_PY_PACKAGE_DIRS "")
-set(pluginlib_SETUP_PY_MODULES "")
-set(pluginlib_SETUP_PY_MODULE_DIRS "")
